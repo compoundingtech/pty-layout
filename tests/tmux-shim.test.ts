@@ -721,7 +721,7 @@ describe("planListPanes", () => {
 
 describe("formatListPanesOutput", () => {
   const mockJson = JSON.stringify([
-    { name: "a1", status: "running", pid: 123, command: "bash", cwd: "/home/me" },
+    { name: "a1", status: "running", pid: 123, command: "bash", cwd: "/home/example" },
     { name: "b2", status: "running", pid: 456, command: "vim", cwd: "/tmp" },
     { name: "c3", status: "exited", pid: null, command: "old" },
   ]);
@@ -735,7 +735,7 @@ describe("formatListPanesOutput", () => {
 
   it("uses default format when no format given", () => {
     const out = formatListPanesOutput(mockJson, "");
-    expect(out).toContain("%a1: bash [/home/me]");
+    expect(out).toContain("%a1: bash [/home/example]");
     expect(out).toContain("%b2: vim [/tmp]");
   });
 
@@ -749,7 +749,7 @@ describe("formatListPanesOutput", () => {
       mockJson,
       "#{pane_id}|#{pane_pid}|#{pane_current_command}|#{pane_current_path}",
     );
-    expect(out).toContain("%a1|123|bash|/home/me");
+    expect(out).toContain("%a1|123|bash|/home/example");
     expect(out).toContain("%b2|456|vim|/tmp");
   });
 
