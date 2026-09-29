@@ -68,15 +68,15 @@ describe("buildShimEnv", () => {
   });
 
   it("preserves other env vars from baseEnv", () => {
-    const env = buildShimEnv([], SHIM, { HOME: "/home/me", USER: "me", FOO: "bar" }, NAME);
-    expect(env.HOME).toBe("/home/me");
-    expect(env.USER).toBe("me");
+    const env = buildShimEnv([], SHIM, { HOME: "/home/example", USER: "example", FOO: "bar" }, NAME);
+    expect(env.HOME).toBe("/home/example");
+    expect(env.USER).toBe("example");
     expect(env.FOO).toBe("bar");
   });
 
   it("strips undefined env values", () => {
-    const env = buildShimEnv([], SHIM, { HOME: "/home/me", MISSING: undefined }, NAME);
-    expect(env.HOME).toBe("/home/me");
+    const env = buildShimEnv([], SHIM, { HOME: "/home/example", MISSING: undefined }, NAME);
+    expect(env.HOME).toBe("/home/example");
     expect("MISSING" in env).toBe(false);
   });
 
@@ -86,13 +86,13 @@ describe("buildShimEnv", () => {
       SHELLOPTS: "braceexpand:emacs",
       BASH_ARGV: "foo",
       BASH_SOURCE: "bar",
-      HOME: "/home/me",
+      HOME: "/home/example",
     }, NAME);
     expect("BASHOPTS" in env).toBe(false);
     expect("SHELLOPTS" in env).toBe(false);
     expect("BASH_ARGV" in env).toBe(false);
     expect("BASH_SOURCE" in env).toBe(false);
-    expect(env.HOME).toBe("/home/me");
+    expect(env.HOME).toBe("/home/example");
   });
 
   it("overrides base TMUX if somehow already set", () => {
